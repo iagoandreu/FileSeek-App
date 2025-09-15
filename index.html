@@ -3,87 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - FileSeek</title>
+    <title>FileSeek - AI File Organizer & Semantic Search for Mac</title>
+    <meta name="description" content="FileSeek is an intelligent macOS app that uses AI to organize your files and lets you find them by describing their content, not just their name. Stop tidying, start thinking.">
+    <meta name="keywords" content="macOS file organizer, AI file management, semantic search Mac, folder organization app, Google AI, Gemini API, find files by content, desktop organization, digital declutter, smart folders">
+    
+    <meta property="og:title" content="FileSeek - Your Brain is for Ideas, Not Filenames.">
+    <meta property="og:description" content="FileSeek uses AI to organize your Mac files and find them by thought, not by keyword.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://iagoandreu.github.io/FileSeek-App/images/AppIcon.png">
+
+    <!-- Google Fonts for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --background-color: #1a1a1d;
+            --text-color: #e0e0e0;
+            --primary-accent: #4a90e2;
+            --secondary-accent: #a9cce3;
+            --card-background: rgba(44, 44, 46, 0.4);
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         body {
-            background-color: #121212;
-            color: #e0e0e0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(-45deg, #1d2b38, #1a1a1d, #2c2a3a);
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+            color: var(--text-color);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             margin: 0;
             padding: 2rem 1rem;
-            line-height: 1.6;
+            line-height: 1.7;
         }
-        main {
-            max-width: 650px;
+
+        .container {
+            max-width: 800px;
             margin: 40px auto;
-            text-align: left;
         }
-        h1 {
-            font-size: 2.5rem;
-            color: #ffffff;
+
+        header {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
             font-weight: 700;
-            margin-bottom: 1rem;
+            line-height: 1.2;
+            background: linear-gradient(90deg, #fff, #a9cce3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
         }
-        h3 {
-            font-size: 1.5rem;
-            color: #a9cce3;
+        
+        header .tagline {
+            font-size: 1.2rem;
+            color: #bbbbbb;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: var(--secondary-accent);
             font-weight: 600;
-            margin-top: 2.5rem;
             margin-bottom: 1rem;
         }
-        p, li {
+        
+        p {
             font-size: 1.1rem;
             color: #bbbbbb;
         }
+
+        .feature-card {
+            background: var(--card-background);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            
+            /* Animation styles */
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .feature-text, .feature-image {
+            flex: 1;
+        }
+        
+        .feature-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .app-store-button {
+            display: inline-block;
+            background-color: var(--primary-accent);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 2rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .app-store-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
+        }
+        
         footer {
+            text-align: center;
             margin-top: 4rem;
             font-size: 0.9rem;
             color: #888888;
-            text-align: center;
         }
-        a {
-            color: #5dade2;
+        
+        footer a {
+            color: #aaa;
             text-decoration: none;
         }
-        a:hover {
+        
+        footer a:hover {
             text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .feature-card, .feature-card:nth-child(even) {
+                flex-direction: column;
+            }
+            header h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
-    <main>
-        <h1>Privacy Policy for FileSeek</h1>
-        <p><strong>Effective Date:</strong> September 1, 2025</p>
-        
-        <p>This Privacy Policy describes how Iago Andreu ("we," "us," or "our") handles information in the FileSeek application (the "App"). Our commitment is to protect your privacy.</p>
 
-        <h3>1. No Personal Data Collection</h3>
-        <p>FileSeek is designed to be a private and secure utility. The App does not collect, store, transmit, or share any personally identifiable information or personal data from you. We do not include any third-party analytics or advertising frameworks.</p>
+    <div class="container">
+        <header>
+            <img src="images/AppIcon.png" alt="FileSeek App Icon" width="128" height="128" style="border-radius: 22%; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            <h1>Your brain is for ideas, not for remembering file paths.</h1>
+            <p class="tagline">
+                FileSeek offloads the low-value work of tidying and remembering, so you can reclaim your focus and get back to a state of flow.
+            </p>
+            <a href="[Your App Store URL Here]" class="app-store-button">Download on the Mac App Store</a>
+        </header>
 
-        <h3>2. Your Files and API Key</h3>
-        <p>All interactions with your files occur locally on your device. When you use the AI features, the relevant file data (such as filenames or content for semantic search indexing) is sent directly from your Mac to the Google AI API. This communication is secured by your personal API key.</p>
-        <p>Your Google AI Studio API key is stored securely in your Mac's local Keychain. It is never transmitted to us or any other third party.</p>
+        <main>
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-text">
+                    <h2>Stop Managing Files. Start Creating.</h2>
+                    <p>
+                        Your computer presents you with a choice: spend the next 20 minutes dragging files into folders, or make <strong>one decision</strong> and get back to your actual work. FileSeek's AI analyzes the chaos and presents a perfect plan. Your only job is to approve it.
+                    </p>
+                </div>
+                <div class="feature-image">
+                    <img src="images/FileStack_previews_1.png" alt="FileSeek showing an AI-generated organization plan for a messy folder">
+                </div>
+            </div>
 
-        <h3>3. Data You Create</h3>
-        <p>All data generated during the use of the App, such as proposed organization plans and the semantic search index, is stored exclusively and locally on your device. This data is sandboxed within the App's private storage and is not accessible by us.</p>
-        
-        <h3>4. Your Control Over Your Data</h3>
-        <p>Because all data is stored locally, you have complete control. You can delete your data at any time by deleting the App from your device.</p>
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-text">
+                    <h2>Why is a search bar a memory test?</h2>
+                    <p>
+                        You remember the document was "about the Q3 financial forecast," but can't recall if you named it 'Report.pdf'. Traditional search fails you. FileSeek’s <strong>semantic search</strong> finds what you <strong>meant</strong>, not just what you typed.
+                    </p>
+                </div>
+                <div class="feature-image">
+                    <img src="images/FileStack_previews_2.png" alt="FileSeek finding a document by searching for its content, not its title">
+                </div>
+            </div>
+            
+            <section class="support animate-on-scroll">
+                <h2 style="text-align:center;">Support & Contact</h2>
+                <p style="text-align:center;">
+                    If you have any questions, encounter a bug, or have a feature request, please do not hesitate to reach out. We are here to help.<br>
+                    <strong>Contact Email:</strong> <a href="mailto:fileseekapp.support@gmail.com">fileseekapp.support@gmail.com</a>
+                </p>
+            </section>
+        </main>
 
-        <h3>5. Children's Privacy</h3>
-        <p>We do not knowingly collect any personally identifiable information from anyone. Since the App does not collect any personal information, it is safe for users of all ages.</p>
+        <footer>
+            <p>&copy; 2025 Iago Andreu González | <a href="privacy-policy.html">Privacy Policy</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        // Simple and performant scroll animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1 // Trigger when 10% of the element is visible
+        });
 
-        <h3>6. Changes to This Privacy Policy</h3>
-        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
-
-        <h3>7. Contact Us</h3>
-        <p>If you have any questions about this Privacy Policy, you can contact us:</p>
-        <ul>
-            <li>By email: <a href="mailto:fileseekapp.support@gmail.com">fileseekapp.support@gmail.com</a></li>
-        </ul>
-    </main>
-    <footer>
-        <p><a href="index.html">Back to Home</a></p>
-    </footer>
+        const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+        elementsToAnimate.forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
