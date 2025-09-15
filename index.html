@@ -40,22 +40,24 @@
             color: var(--text-color);
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             margin: 0;
-            padding: 2rem 1rem;
+            padding: 2rem;
             line-height: 1.7;
         }
 
         .container {
-            max-width: 800px;
+            /* -- WIDER LAYOUT -- */
+            /* Increased max-width for desktops, but still constrained */
+            max-width: 1100px; 
             margin: 40px auto;
         }
 
         header {
             text-align: center;
-            padding: 4rem 0;
+            padding: 6rem 0; /* More vertical space for impact */
         }
 
         header h1 {
-            font-size: 3.5rem;
+            font-size: 4rem; /* Larger hero title */
             font-weight: 700;
             line-height: 1.2;
             background: linear-gradient(90deg, #fff, #a9cce3);
@@ -87,16 +89,15 @@
             background: var(--card-background);
             border: 1px solid var(--card-border);
             border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 3rem;
+            padding: 3rem; /* More padding */
+            margin-bottom: 4rem; /* More space between sections */
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 3rem; /* More space between text and image */
             
-            /* Animation styles */
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -111,8 +112,15 @@
             flex-direction: row-reverse;
         }
         
-        .feature-text, .feature-image {
+        .feature-text {
+             /* Text takes up less space */
             flex: 1;
+        }
+
+        .feature-image {
+            /* -- LARGER IMAGE RATIO -- */
+            /* Image takes up more space, making it larger */
+            flex: 1.5;
         }
         
         .feature-image img {
@@ -145,20 +153,20 @@
             color: #888888;
         }
         
-        footer a {
-            color: #aaa;
-            text-decoration: none;
-        }
-        
-        footer a:hover {
-            text-decoration: underline;
-        }
+        footer a { color: #aaa; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
 
+        /* -- RESPONSIVE DESIGN FOR MOBILE -- */
         @media (max-width: 768px) {
+            body { padding: 1rem; }
+            header { padding: 4rem 0; }
+            header h1 { font-size: 2.8rem; }
+            h2 { font-size: 2rem; }
+
             .feature-card, .feature-card:nth-child(even) {
                 flex-direction: column;
+                padding: 2rem;
             }
-            header h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
@@ -166,7 +174,7 @@
 
     <div class="container">
         <header>
-            <img src="images/AppIcon.png" alt="FileSeek App Icon" width="128" height="128" style="border-radius: 22%; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            <img src="images/AppIcon.png" alt="FileSeek App Icon" width="140" height="140" style="border-radius: 24%; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
             <h1>Your brain is for ideas, not for remembering file paths.</h1>
             <p class="tagline">
                 FileSeek offloads the low-value work of tidying and remembering, so you can reclaim your focus and get back to a state of flow.
@@ -203,7 +211,7 @@
                 <h2 style="text-align:center;">Support & Contact</h2>
                 <p style="text-align:center;">
                     If you have any questions, encounter a bug, or have a feature request, please do not hesitate to reach out. We are here to help.<br>
-                    <strong>Contact Email:</strong> <a href="mailto:fileseekapp.support@gmail.com">fileseekapp.support@gmail.com</a>
+                    <strong>Contact Email:</strong> <a href="mailto:file.seek.cs@gmail.com">file.seek.cs@gmail.com</a>
                 </p>
             </section>
         </main>
@@ -214,7 +222,6 @@
     </div>
     
     <script>
-        // Simple and performant scroll animation
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -222,7 +229,7 @@
                 }
             });
         }, {
-            threshold: 0.1 // Trigger when 10% of the element is visible
+            threshold: 0.1
         });
 
         const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
