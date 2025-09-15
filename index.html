@@ -53,26 +53,26 @@
         header {
             text-align: center;
             padding: 6rem 0;
-            position: relative; /* Needed for icon positioning */
+            position: relative;
         }
 
         /* --- INTRO ANIMATION STYLES --- */
         #hero-icon {
-            transition: transform 1.2s cubic-bezier(0.6, 0, 0.2, 1);
+            /* -- SLOWER ANIMATION -- */
+            transition: transform 3.6s cubic-bezier(0.6, 0, 0.2, 1);
         }
         
         .content-fade {
             opacity: 1;
-            transition: opacity 1s ease-in-out 0.5s; /* Fade in after icon starts moving */
+            /* Fade in more slowly, and after a longer delay to match the icon */
+            transition: opacity 1.5s ease-in-out 2s;
         }
         
         body.intro-animating #hero-icon {
-            /* Start state: 3x larger, centered vertically in the viewport */
             transform: scale(3) translateY(calc(50vh - 200px));
         }
 
         body.intro-animating .content-fade {
-            /* Start state: completely invisible */
             opacity: 0;
         }
         /* --- END INTRO ANIMATION STYLES --- */
@@ -186,11 +186,14 @@
         }
     </style>
 </head>
-<body class="intro-animating"> <!-- Starts with animation class -->
+<body class="intro-animating">
 
     <div class="container">
         <header>
-            <img id="hero-icon" src="images/AppIcon.png" alt="FileSeek App Icon" width="140" height="140" style="margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            <!-- -- NO EXTRA STYLING -- -->
+            <!-- The icon is now a pure image with only a margin for spacing -->
+            <img id="hero-icon" src="images/AppIcon.png" alt="FileSeek App Icon" width="140" height="140" style="margin-bottom: 2rem;">
+
             <div class="content-fade">
                 <h1>Your brain is for ideas, not for remembering file paths.</h1>
                 <p class="tagline">
@@ -240,19 +243,15 @@
     </div>
     
     <script>
-        // --- INTRO ANIMATION LOGIC ---
         document.addEventListener('DOMContentLoaded', () => {
             const lastVisitKey = 'fileSeekLastVisitDate';
-            const today = new Date().toDateString(); // e.g., "Mon Sep 15 2025"
+            const today = new Date().toDateString();
             const lastVisit = localStorage.getItem(lastVisitKey);
             const body = document.body;
 
             if (lastVisit === today) {
-                // If visited today, load instantly without animation.
                 body.classList.remove('intro-animating');
             } else {
-                // First visit of the day. Trigger the animation.
-                // We use a tiny timeout to ensure the browser has rendered the initial state.
                 setTimeout(() => {
                     body.classList.remove('intro-animating');
                     localStorage.setItem(lastVisitKey, today);
@@ -260,7 +259,6 @@
             }
         });
         
-        // --- SCROLL ANIMATION LOGIC ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
