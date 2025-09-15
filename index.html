@@ -42,22 +42,43 @@
             margin: 0;
             padding: 2rem;
             line-height: 1.7;
+            overflow-x: hidden;
         }
 
         .container {
-            /* -- WIDER LAYOUT -- */
-            /* Increased max-width for desktops, but still constrained */
             max-width: 1100px; 
             margin: 40px auto;
         }
 
         header {
             text-align: center;
-            padding: 6rem 0; /* More vertical space for impact */
+            padding: 6rem 0;
+            position: relative; /* Needed for icon positioning */
         }
 
+        /* --- INTRO ANIMATION STYLES --- */
+        #hero-icon {
+            transition: transform 1.2s cubic-bezier(0.6, 0, 0.2, 1);
+        }
+        
+        .content-fade {
+            opacity: 1;
+            transition: opacity 1s ease-in-out 0.5s; /* Fade in after icon starts moving */
+        }
+        
+        body.intro-animating #hero-icon {
+            /* Start state: 3x larger, centered vertically in the viewport */
+            transform: scale(3) translateY(calc(50vh - 200px));
+        }
+
+        body.intro-animating .content-fade {
+            /* Start state: completely invisible */
+            opacity: 0;
+        }
+        /* --- END INTRO ANIMATION STYLES --- */
+
         header h1 {
-            font-size: 4rem; /* Larger hero title */
+            font-size: 4rem;
             font-weight: 700;
             line-height: 1.2;
             background: linear-gradient(90deg, #fff, #a9cce3);
@@ -89,14 +110,14 @@
             background: var(--card-background);
             border: 1px solid var(--card-border);
             border-radius: 20px;
-            padding: 3rem; /* More padding */
-            margin-bottom: 4rem; /* More space between sections */
+            padding: 3rem;
+            margin-bottom: 4rem;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             
             display: flex;
             align-items: center;
-            gap: 3rem; /* More space between text and image */
+            gap: 3rem;
             
             opacity: 0;
             transform: translateY(30px);
@@ -112,16 +133,8 @@
             flex-direction: row-reverse;
         }
         
-        .feature-text {
-             /* Text takes up less space */
-            flex: 1;
-        }
-
-        .feature-image {
-            /* -- LARGER IMAGE RATIO -- */
-            /* Image takes up more space, making it larger */
-            flex: 1.5;
-        }
+        .feature-text { flex: 1; }
+        .feature-image { flex: 1.5; }
         
         .feature-image img {
             width: 100%;
@@ -156,7 +169,6 @@
         footer a { color: #aaa; text-decoration: none; }
         footer a:hover { text-decoration: underline; }
 
-        /* -- RESPONSIVE DESIGN FOR MOBILE -- */
         @media (max-width: 768px) {
             body { padding: 1rem; }
             header { padding: 4rem 0; }
@@ -167,22 +179,28 @@
                 flex-direction: column;
                 padding: 2rem;
             }
+            
+            body.intro-animating #hero-icon {
+                transform: scale(3) translateY(calc(50vh - 150px));
+            }
         }
     </style>
 </head>
-<body>
+<body class="intro-animating"> <!-- Starts with animation class -->
 
     <div class="container">
         <header>
-            <img src="images/AppIcon.png" alt="FileSeek App Icon" width="140" height="140" style="border-radius: 24%; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-            <h1>Your brain is for ideas, not for remembering file paths.</h1>
-            <p class="tagline">
-                FileSeek offloads the low-value work of tidying and remembering, so you can reclaim your focus and get back to a state of flow.
-            </p>
-            <a href="[Your App Store URL Here]" class="app-store-button">Download on the Mac App Store</a>
+            <img id="hero-icon" src="images/AppIcon.png" alt="FileSeek App Icon" width="140" height="140" style="margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            <div class="content-fade">
+                <h1>Your brain is for ideas, not for remembering file paths.</h1>
+                <p class="tagline">
+                    FileSeek offloads the low-value work of tidying and remembering, so you can reclaim your focus and get back to a state of flow.
+                </p>
+                <a href="[Your App Store URL Here]" class="app-store-button">Download on the Mac App Store</a>
+            </div>
         </header>
 
-        <main>
+        <main class="content-fade">
             <div class="feature-card animate-on-scroll">
                 <div class="feature-text">
                     <h2>Stop Managing Files. Start Creating.</h2>
@@ -216,12 +234,33 @@
             </section>
         </main>
 
-        <footer>
+        <footer class="content-fade">
             <p>&copy; 2025 Iago Andreu González | <a href="privacy-policy.html">Privacy Policy</a></p>
         </footer>
     </div>
     
     <script>
+        // --- INTRO ANIMATION LOGIC ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const lastVisitKey = 'fileSeekLastVisitDate';
+            const today = new Date().toDateString(); // e.g., "Mon Sep 15 2025"
+            const lastVisit = localStorage.getItem(lastVisitKey);
+            const body = document.body;
+
+            if (lastVisit === today) {
+                // If visited today, load instantly without animation.
+                body.classList.remove('intro-animating');
+            } else {
+                // First visit of the day. Trigger the animation.
+                // We use a tiny timeout to ensure the browser has rendered the initial state.
+                setTimeout(() => {
+                    body.classList.remove('intro-animating');
+                    localStorage.setItem(lastVisitKey, today);
+                }, 100);
+            }
+        });
+        
+        // --- SCROLL ANIMATION LOGIC ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
