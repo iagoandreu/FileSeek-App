@@ -56,15 +56,12 @@
             position: relative;
         }
 
-        /* --- INTRO ANIMATION STYLES --- */
         #hero-icon {
-            /* -- SLOWER ANIMATION -- */
             transition: transform 3.6s cubic-bezier(0.6, 0, 0.2, 1);
         }
         
         .content-fade {
             opacity: 1;
-            /* Fade in more slowly, and after a longer delay to match the icon */
             transition: opacity 1.5s ease-in-out 2s;
         }
         
@@ -75,7 +72,6 @@
         body.intro-animating .content-fade {
             opacity: 0;
         }
-        /* --- END INTRO ANIMATION STYLES --- */
 
         header h1 {
             font-size: 4rem;
@@ -96,9 +92,11 @@
 
         h2 {
             font-size: 2.5rem;
-            color: var(--secondary-accent);
             font-weight: 600;
             margin-bottom: 1rem;
+            background: linear-gradient(90deg, #fff, #a9cce3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         p {
@@ -190,8 +188,6 @@
 
     <div class="container">
         <header>
-            <!-- -- NO EXTRA STYLING -- -->
-            <!-- The icon is now a pure image with only a margin for spacing -->
             <img id="hero-icon" src="images/AppIcon.png" alt="FileSeek App Icon" width="140" height="140" style="margin-bottom: 2rem;">
 
             <div class="content-fade">
@@ -199,7 +195,8 @@
                 <p class="tagline">
                     FileSeek offloads the low-value work of tidying and remembering, so you can reclaim your focus and get back to a state of flow.
                 </p>
-                <a href="[Your App Store URL Here]" class="app-store-button">Download on the Mac App Store</a>
+                <!-- --- THIS IS THE FIX: The real App Store link is now here --- -->
+                <a href="https://apps.apple.com/es/app/fileseek/id6752425886?l=en&mt=12" class="app-store-button">Download on the Mac App Store</a>
             </div>
         </header>
 
