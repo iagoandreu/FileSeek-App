@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FileSeek - AI File Organizer & Semantic Search for Mac</title>
     <meta name="description" content="FileSeek is an intelligent macOS app that uses AI to organize your files and lets you find them by describing their content, not just their name. Stop tidying, start thinking.">
-    <meta name="keywords" content="macOS file organizer, AI file management, semantic search Mac, folder organization app, Google AI, Gemini API, find files by content, desktop organization, digital declutter, smart folders">
+    <meta name="keywords" content="macOS file organizer, AI file management, semantic search Mac, folder organization app, Google AI, Gemini API, find files by content, desktop organization, digital declutter, smart folders, personal API key">
     
     <meta property="og:title" content="FileSeek - Your Brain is for Ideas, Not Filenames.">
     <meta property="og:description" content="FileSeek uses AI to organize your Mac files and find them by thought, not by keyword.">
@@ -45,168 +45,66 @@
             overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1100px; 
-            margin: 40px auto;
-        }
-
-        header {
-            text-align: center;
-            padding: 6rem 0;
-            position: relative;
-        }
-
-        #hero-icon {
-            transition: transform 3.6s cubic-bezier(0.6, 0, 0.2, 1);
-        }
+        .container { max-width: 1100px; margin: 40px auto; }
+        header { text-align: center; padding: 6rem 0; position: relative; }
+        header h1 { font-size: 4rem; font-weight: 700; line-height: 1.2; background: linear-gradient(90deg, #fff, var(--secondary-accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1.5rem; }
+        header .tagline { font-size: 1.2rem; color: #bbbbbb; max-width: 600px; margin: 0 auto; }
+        h2 { font-size: 2.5rem; color: var(--secondary-accent); font-weight: 600; text-align: center; margin-bottom: 2rem; }
+        p { font-size: 1.1rem; color: #bbbbbb; }
         
-        .content-fade {
-            opacity: 1;
-            transition: opacity 1.5s ease-in-out 2s;
-        }
-        
-        body.intro-animating #hero-icon {
-            transform: scale(3) translateY(calc(50vh - 200px));
-        }
-
-        body.intro-animating .content-fade {
-            opacity: 0;
-        }
-
-        header h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            line-height: 1.2;
-            background: linear-gradient(90deg, #fff, #a9cce3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1.5rem;
-        }
-        
-        header .tagline {
-            font-size: 1.2rem;
-            color: #bbbbbb;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, #fff, #a9cce3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        p {
-            font-size: 1.1rem;
-            color: #bbbbbb;
-        }
-
-        .feature-card {
-            background: var(--card-background);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 3rem;
-            margin-bottom: 4rem;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            
-            display: flex;
-            align-items: center;
-            gap: 3rem;
-            
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        
-        .feature-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .feature-card:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-        
+        .feature-card { background: var(--card-background); border: 1px solid var(--card-border); border-radius: 20px; padding: 3rem; margin-bottom: 4rem; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); display: flex; align-items: center; gap: 3rem; opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .feature-card.visible { opacity: 1; transform: translateY(0); }
+        .feature-card:nth-child(even) { flex-direction: row-reverse; }
         .feature-text { flex: 1; }
         .feature-image { flex: 1.5; }
+        .feature-image img { width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
         
-        .feature-image img {
-            width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
+        /* --- FAQ STYLING --- */
+        .faq-section { margin: 6rem 0; opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .faq-section.visible { opacity: 1; transform: translateY(0); }
+        details { background: var(--card-background); border: 1px solid var(--card-border); border-radius: 12px; margin-bottom: 1rem; padding: 1rem 1.5rem; transition: background-color 0.3s ease; }
+        details[open] { background: rgba(50, 50, 52, 0.5); }
+        summary { font-size: 1.2rem; font-weight: 600; color: var(--text-color); cursor: pointer; list-style: none; position: relative; padding-right: 2rem; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '+'; position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); font-size: 1.8rem; color: var(--primary-accent); transition: transform 0.2s ease; }
+        details[open] summary::after { content: '\00d7'; transform: translateY(-50%); }
+        details p { margin-top: 1rem; padding-left: 0.5rem; border-left: 2px solid var(--primary-accent); color: #ccc; }
+        /* --- END FAQ STYLING --- */
+
+        .app-store-button { display: inline-block; background-color: var(--primary-accent); color: #fff; padding: 12px 24px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 2rem; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .app-store-button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3); }
         
-        .app-store-button {
-            display: inline-block;
-            background-color: var(--primary-accent);
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            margin-top: 2rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        
-        .app-store-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 4rem;
-            font-size: 0.9rem;
-            color: #888888;
-        }
-        
+        footer { text-align: center; margin-top: 4rem; font-size: 0.9rem; color: #888888; }
         footer a { color: #aaa; text-decoration: none; }
         footer a:hover { text-decoration: underline; }
+
+        /* -- EMAIL COLOR FIX -- */
+        .support a { color: var(--secondary-accent); }
 
         @media (max-width: 768px) {
             body { padding: 1rem; }
             header { padding: 4rem 0; }
             header h1 { font-size: 2.8rem; }
             h2 { font-size: 2rem; }
-
-            .feature-card, .feature-card:nth-child(even) {
-                flex-direction: column;
-                padding: 2rem;
-            }
-            
-            body.intro-animating #hero-icon {
-                transform: scale(3) translateY(calc(50vh - 150px));
-            }
+            .feature-card, .feature-card:nth-child(even) { flex-direction: column; padding: 2rem; }
         }
     </style>
 </head>
-<body class="intro-animating">
+<body>
 
     <div class="container">
         <header>
             <img id="hero-icon" src="images/AppIcon.png" alt="FileSeek App Icon" width="140" height="140" style="margin-bottom: 2rem;">
-
-            <div class="content-fade">
-                <h1>Your brain is for ideas, not for remembering file paths.</h1>
-                <p class="tagline">
-                    FileSeek offloads the low-value work of tidying and remembering, so you can reclaim your focus and get back to a state of flow.
-                </p>
-                <!-- --- THIS IS THE FIX: The real App Store link is now here --- -->
-                <a href="https://apps.apple.com/es/app/fileseek/id6752425886?l=en&mt=12" class="app-store-button">Download on the Mac App Store</a>
-            </div>
+            <h1>Your brain is for ideas, not for remembering file paths.</h1>
+            <p class="tagline">FileSeek offloads the low-value work of tidying and remembering, so you can reclaim your focus and get back to a state of flow.</p>
+            <a href="#" class="app-store-button">Download on the Mac App Store</a>
         </header>
 
-        <main class="content-fade">
+        <main>
             <div class="feature-card animate-on-scroll">
                 <div class="feature-text">
                     <h2>Stop Managing Files. Start Creating.</h2>
-                    <p>
-                        Your computer presents you with a choice: spend the next 20 minutes dragging files into folders, or make <strong>one decision</strong> and get back to your actual work. FileSeek's AI analyzes the chaos and presents a perfect plan. Your only job is to approve it.
-                    </p>
+                    <p>Your computer presents you with a choice: spend the next 20 minutes dragging files into folders, or make <strong>one decision</strong> and get back to your actual work. FileSeek's AI analyzes the chaos and presents a perfect plan. Your only job is to approve it.</p>
                 </div>
                 <div class="feature-image">
                     <img src="images/FileStack_previews_1.png" alt="FileSeek showing an AI-generated organization plan for a messy folder">
@@ -216,15 +114,36 @@
             <div class="feature-card animate-on-scroll">
                 <div class="feature-text">
                     <h2>Why is a search bar a memory test?</h2>
-                    <p>
-                        You remember the document was "about the Q3 financial forecast," but can't recall if you named it 'Report.pdf'. Traditional search fails you. FileSeek’s <strong>semantic search</strong> finds what you <strong>meant</strong>, not just what you typed.
-                    </p>
+                    <p>You remember the document was "about the Q3 financial forecast," but can't recall if you named it 'Report.pdf'. Traditional search fails you. FileSeek’s <strong>semantic search</strong> finds what you <strong>meant</strong>, not just what you typed.</p>
                 </div>
                 <div class="feature-image">
                     <img src="images/FileStack_previews_2.png" alt="FileSeek finding a document by searching for its content, not its title">
                 </div>
             </div>
             
+            <!-- NEW FAQ Section -->
+            <section class="faq-section animate-on-scroll">
+                <h2>Frequently Asked Questions</h2>
+                <details>
+                    <summary>How does it know how to group files?</summary>
+                    <p>FileSeek uses Google's advanced AI to "read" and understand the content of your files—not just the text, but the context and subject matter. It acts like a brilliant librarian, identifying common themes and relationships between documents, images, and other files to propose a logical folder structure.</p>
+                </details>
+                <details>
+                    <summary>How does it find a file from a description?</summary>
+                    <p>This is called **semantic search**. Instead of matching exact keywords in a filename, FileSeek converts your description (e.g., "the financial report from last quarter") and the content of your files into mathematical representations of their meaning. It then finds the files whose meaning is closest to your query, allowing you to search by thought, not just by keyword.</p>
+                </details>
+                <details>
+                    <summary>What kind of folders can I use?</summary>
+                    <p>You can select any folder on your Mac. When you want to organize a folder or search within it, FileSeek will prompt you with the standard macOS file picker to grant it temporary, secure access. It only ever accesses the folders you explicitly choose for each operation.</p>
+                </details>
+                <details>
+                    <summary>Why do I have to use a personal API key?</summary>
+                    <p>This is a core design choice for two crucial reasons: **cost and privacy.** <br><br>
+                    <strong>1. No Subscription Fee:</strong> By using your own API key, FileSeek leverages the generous free tier provided by Google AI Studio. For the vast majority of users, this is more than enough for daily use at no cost. If you are a power user and hit the free rate limit (a certain number of requests per minute), you simply need to wait a moment for it to reset. This model means you don't pay us a recurring fee. If you need unlimited power, you can upgrade your *own* Google account to a paid plan and pay Google directly only for what you use.<br><br>
+                    <strong>2. Unparalleled Privacy and Security:</strong> Your personal API key creates a secure, direct tunnel from your Mac to your own Google AI account. Your files are **never** sent to our servers or any other centralized service. This is the most private way to use a cloud AI, ensuring only you and Google ever process your data, under your own account's privacy settings.</p>
+                </details>
+            </section>
+
             <section class="support animate-on-scroll">
                 <h2 style="text-align:center;">Support & Contact</h2>
                 <p style="text-align:center;">
@@ -234,28 +153,13 @@
             </section>
         </main>
 
-        <footer class="content-fade">
+        <footer>
             <p>&copy; 2025 Iago Andreu González | <a href="privacy-policy.html">Privacy Policy</a></p>
         </footer>
     </div>
     
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const lastVisitKey = 'fileSeekLastVisitDate';
-            const today = new Date().toDateString();
-            const lastVisit = localStorage.getItem(lastVisitKey);
-            const body = document.body;
-
-            if (lastVisit === today) {
-                body.classList.remove('intro-animating');
-            } else {
-                setTimeout(() => {
-                    body.classList.remove('intro-animating');
-                    localStorage.setItem(lastVisitKey, today);
-                }, 100);
-            }
-        });
-        
+        // Scroll-in animation logic for feature cards
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
